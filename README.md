@@ -10,11 +10,11 @@
 
 Paver Editor is a drag and drop based block editor (or page builder).
 
-For detailed instructions on how to use the editor in WordPress, see the [documentation](https://paver.com/docs).
+For detailed instructions on how to use the editor in WordPress, see the [documentation](https://pavereditor.com/docs).
 
 ## Roadmap
 
-- Add more options, such as colorpicker, pages/posts dropdown select
+- Add more options, such as color picker, pages/posts dropdown select
 - Cache the rendered version, instead of rendering it every time (though most caching plugins like WP Rocket will already prevent rerendering)
 
 ## Contributors
