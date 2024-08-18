@@ -1,4 +1,4 @@
-<p align="center"><a href="https://vanrossum.dev" target="_blank"><img src="resources/svgs/logo.svg" width="320" alt="vanrossum.dev Logo"></a></p>
+<p align="center"><a href="https://pavereditor.com" target="_blank"><img src="resources/svgs/logo.svg" width="320" alt="Paver Logo"></a></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/jeffreyvanrossum/paver-for-wordpress"><img src="https://img.shields.io/packagist/dt/jeffreyvanrossum/paver-for-wordpress" alt="Total Downloads"></a>
@@ -19,7 +19,7 @@ For detailed instructions on how to use the editor in WordPress, see the [docume
 
 ## Contributors
 * [Jeffrey van Rossum](https://github.com/jeffreyvr)
-* [All contributors](https://github.com/jeffreyvr/paver/graphs/contributors)
+* [All contributors](https://github.com/jeffreyvr/paver-for-wordpress/graphs/contributors)
 
 ## License
 MIT. Please see the [License File](/LICENSE) for more information.
