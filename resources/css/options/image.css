@@ -1,0 +1,42 @@
+.selected-image {
+  height: 160px;
+  border: 1px solid var(--paver-color-light);
+  display: block;
+  width: 100%;
+  overflow: hidden;
+
+  position: relative;
+
+  img {
+    height: 160px;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    /* width: 100%; */
+  }
+}
+
+.placeholder-image {
+  height: 160px;
+  border: 1px solid var(--paver-color-light);
+  display: block;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-buttons {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+
+  .btn-icon {
+    background: rgba(255, 255, 255, .9);
+  }
+}

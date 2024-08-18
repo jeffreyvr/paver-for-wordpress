@@ -1,0 +1,33 @@
+{
+  "name": "jeffreyvanrossum/paver-for-wordpress",
+  "description": "Block based drag and drop editor built with Alpinejs.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeffrey van Rossum",
+      "email": "jeffrey@vanrossum.dev"
+    }
+  ],
+  "require": {
+    "php": "^8.0|^8.1|^8.2",
+    "jeffreyvanrossum/paver": "dev-main",
+    "jeffreyvanrossum/wp-settings": "^1.2"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.4",
+    "spatie/ray": "^1.36",
+    "spatie/x-ray": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jeffreyvr\\PaverForWordpress\\": "src"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "scripts": {
+    "format": "./vendor/bin/pint ./src/",
+    "x-ray": "./vendor/bin/x-ray ."
+  }
+}

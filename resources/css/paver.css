@@ -1,0 +1,14 @@
+@import "../../vendor/jeffreyvanrossum/paver/resources/css/paver.css";
+@import "_variables.css";
+@import "options/image.css";
+
+#paver {
+  .postbox-header {
+    display: none;
+  }
+
+  .inside {
+    padding: 0;
+    margin: 0;
+  }
+}

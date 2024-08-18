@@ -1,0 +1,45 @@
+{
+    "name": "permafrost-dev/code-snippets",
+    "description": "Easily work with code snippets in PHP",
+    "keywords": [
+        "permafrost",
+        "code",
+        "snippets",
+        "code-snippets"
+    ],
+    "homepage": "https://github.com/permafrost-dev/code-snippets",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Patrick Organ",
+            "email": "patrick@permafrost.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "spatie/phpunit-snapshot-assertions": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Permafrost\\CodeSnippets\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Permafrost\\CodeSnippets\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html build/coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
