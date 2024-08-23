@@ -14,7 +14,7 @@ For detailed instructions on how to use the editor in WordPress, see the [docume
 
 ## Roadmap
 
-- Add more options, such as color picker, pages/posts dropdown select
+- Add more options, such as a pages/posts dropdown select
 - Cache the rendered version, instead of rendering it every time (though most caching plugins like WP Rocket will already prevent rerendering)
 
 ## Contributors
