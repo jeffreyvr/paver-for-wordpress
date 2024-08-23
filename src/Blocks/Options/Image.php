@@ -17,6 +17,11 @@ class Image extends Option
         //
     }
 
+    public static function scripts()
+    {
+        wp_enqueue_media();
+    }
+
     public function storeAsId()
     {
         $this->storeAs = 'id';

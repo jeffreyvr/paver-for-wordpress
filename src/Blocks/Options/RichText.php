@@ -11,6 +11,11 @@ class RichText extends Option
         //
     }
 
+    public static function scripts()
+    {
+        wp_enqueue_editor();
+    }
+
     public function render(): string
     {
         $config = htmlentities(json_encode($this->config), ENT_QUOTES, 'UTF-8');

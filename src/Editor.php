@@ -256,9 +256,6 @@ class Editor
 
     function render($post)
     {
-        wp_enqueue_editor();
-        wp_enqueue_media();
-
         if (! $this->usePaverEditor()) {
             echo '<p>Want to use the Paver editor instead?</p>';
             echo '<a href="'.$this->editWithPaver($post).'" class="button button-primary">'.file_get_contents('../resources/svgs/icon.svg').'Use Paver</a></p>';
