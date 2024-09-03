@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": "^8.0|^8.1|^8.2",
-    "jeffreyvanrossum/paver": "dev-main",
+    "jeffreyvanrossum/paver": "^0.0.1",
     "jeffreyvanrossum/wp-settings": "^1.2"
   },
   "require-dev": {
