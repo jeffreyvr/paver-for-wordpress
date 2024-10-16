@@ -157,14 +157,12 @@ class Editor
             'strategy' => 'defer'
         ]);
 
-        foreach (paver()->blocks() as $key => $block) {
-            $blockInstance = BlockFactory::createById($key);
-
-            foreach ($blockInstance->styles as $style) {
+        foreach (paver()->blocks(withInstance: true) as $block) {
+            foreach ($block['instance']->styles as $style) {
                 wp_enqueue_style($style['handle'], $style['src'], $style['deps']);
             }
 
-            foreach ($blockInstance->scripts as $script) {
+            foreach ($block['instance']->scripts as $script) {
                 wp_enqueue_script($script['handle'], $script['src'], $script['deps']);
             }
         }
@@ -228,10 +226,8 @@ class Editor
     {
         $output = $this->editorStyles();
 
-        foreach (paver()->blocks() as $key => $block) {
-            $blockInstance = BlockFactory::createById($key);
-
-            foreach ($blockInstance->styles as $style) {
+        foreach (paver()->blocks(withInstance: true) as $block) {
+            foreach ($block['instance']->styles as $style) {
                 $output .= '<link rel="stylesheet" href="' . $style['src'] . '">';
             }
         }
@@ -243,10 +239,8 @@ class Editor
     {
         $output = '';
 
-        foreach (paver()->blocks() as $key => $block) {
-            $blockInstance = BlockFactory::createById($key);
-
-            foreach ($blockInstance->scripts as $script) {
+        foreach (paver()->blocks(withInstance: true) as $block) {
+            foreach ($block['instance']->scripts as $script) {
                 $output .= '<script src="' . $script['src'] . '"></script>';
             }
         }
