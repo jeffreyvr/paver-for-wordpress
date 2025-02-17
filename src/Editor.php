@@ -263,7 +263,7 @@ class Editor
 
         paver()->locale = explode('_', get_locale())[0] ?? 'en';
 
-        echo paver()->render($blocks, [
+        echo paver()->render(empty($blocks) ? null : $blocks, [
             'showSaveButton' => false
         ]);
 
