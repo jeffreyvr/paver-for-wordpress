@@ -248,6 +248,28 @@ class Editor
         return $output;
     }
 
+    /**
+     * Options such as RichText and Image need WordPress editor and media
+     * scripts. They expose that through a static scripts() method; call it for
+     * every option in use so the dependency is enqueued only when needed.
+     */
+    function enqueueOptionScripts()
+    {
+        foreach (paver()->blocks(withInstance: true) as $block) {
+            $options = $block['instance']->options();
+
+            if (! is_array($options)) {
+                continue;
+            }
+
+            foreach ($options as $option) {
+                if (is_object($option) && method_exists($option, 'scripts')) {
+                    $option::scripts();
+                }
+            }
+        }
+    }
+
     function render($post)
     {
         if (! $this->usePaverEditor()) {
@@ -255,6 +277,8 @@ class Editor
             echo '<a href="'.$this->editWithPaver($post).'" class="button button-primary">'.file_get_contents('../resources/svgs/icon.svg').'Use Paver</a></p>';
             return;
         }
+
+        $this->enqueueOptionScripts();
 
         $blocks = get_post_meta($post->ID, '_paver_editor_content', true);
 
