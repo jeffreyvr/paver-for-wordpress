@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "666bab627f4130c47f6bc3031880b405",
+    "content-hash": "885f563c694c74130e94ce2e40c31c82",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -62,16 +62,16 @@
         },
         {
             "name": "jeffreyvanrossum/paver",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeffreyvr/paver.git",
-                "reference": "c32663cbde45a24ad64c8963d04656704683fecb"
+                "reference": "6bfee162f8825f6d46849aa2666af7840bed5ed7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeffreyvr/paver/zipball/c32663cbde45a24ad64c8963d04656704683fecb",
-                "reference": "c32663cbde45a24ad64c8963d04656704683fecb",
+                "url": "https://api.github.com/repos/jeffreyvr/paver/zipball/6bfee162f8825f6d46849aa2666af7840bed5ed7",
+                "reference": "6bfee162f8825f6d46849aa2666af7840bed5ed7",
                 "shasum": ""
             },
             "require": {
@@ -105,7 +105,7 @@
             "description": "Block based drag and drop editor for developers.",
             "support": {
                 "issues": "https://github.com/jeffreyvr/paver/issues",
-                "source": "https://github.com/jeffreyvr/paver/tree/0.3.0"
+                "source": "https://github.com/jeffreyvr/paver/tree/0.4.0"
             },
             "funding": [
                 {
@@ -113,7 +113,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-20T05:30:55+00:00"
+            "time": "2026-07-20T18:13:50+00:00"
         },
         {
             "name": "jeffreyvanrossum/wp-settings",

@@ -2,41 +2,23 @@
 
 namespace Jeffreyvr\PaverForWordpress\Api;
 
-use Jeffreyvr\Paver\Endpoints\Fetch;
-use Jeffreyvr\Paver\Endpoints\Render;
-use Jeffreyvr\Paver\Endpoints\Options;
-use Jeffreyvr\Paver\Endpoints\Resolve;
+use Jeffreyvr\Paver\Endpoints\Handler;
 
 class Endpoints
 {
-    function permission($request)
+    public function permission($request)
     {
         return current_user_can('edit_post', $request->get_param('post_id'));
     }
 
     public function __construct()
     {
-        register_rest_route('paver/v1', '/editor/options', [
+        // A single route serves every action; Handler dispatches on the
+        // `action` in the request body. The closure drops WordPress's request
+        // object so Handler reads the raw body itself, as the endpoints do.
+        register_rest_route('paver/v1', '/editor', [
             'methods' => 'POST',
-            'callback' => [new Options, 'handle'],
-            'permission_callback' => [$this, 'permission'],
-        ]);
-
-        register_rest_route('paver/v1', '/editor/render', [
-            'methods' => 'POST',
-            'callback' => [new Render, 'handle'],
-            'permission_callback' => [$this, 'permission'],
-        ]);
-
-        register_rest_route('paver/v1', '/editor/fetch', [
-            'methods' => 'POST',
-            'callback' => [new Fetch, 'handle'],
-            'permission_callback' => [$this, 'permission'],
-        ]);
-
-        register_rest_route('paver/v1', '/editor/resolve', [
-            'methods' => 'POST',
-            'callback' => [new Resolve, 'handle'],
+            'callback' => fn () => Handler::run(),
             'permission_callback' => [$this, 'permission'],
         ]);
     }
