@@ -2,10 +2,10 @@
 
 namespace Jeffreyvr\PaverForWordpress;
 
-use Jeffreyvr\WPSettings\WPSettings;
+use Jeffreyvr\Paver\Paver as BasePaver;
 use Jeffreyvr\PaverForWordpress\Api\Endpoints;
 use Jeffreyvr\PaverForWordpress\Editor as WordPressEditor;
-use Jeffreyvr\Paver\Paver as BasePaver;
+use Jeffreyvr\WPSettings\WPSettings;
 
 class Paver extends BasePaver
 {
@@ -19,19 +19,14 @@ class Paver extends BasePaver
 
     public string|array $wordpressAssetPath = __DIR__.'/../assets/';
 
-    function bootForWordPress()
+    public function bootForWordPress()
     {
-        $this->wordPressEditor = new WordPressEditor();
+        $this->wordPressEditor = new WordPressEditor;
 
-        $this->api->setEndpoints([
-            'fetch' => '/wp-json/paver/v1/editor/fetch',
-            'render' => '/wp-json/paver/v1/editor/render',
-            'options' => '/wp-json/paver/v1/editor/options',
-            'resolve' => '/wp-json/paver/v1/editor/resolve'
-        ]);
+        $this->api->setEndpoint('/wp-json/paver/v1/editor');
 
         $this->assetPath = [
-            __DIR__ . '/../assets/',
+            __DIR__.'/../assets/',
             $this->assetPath,
         ];
 
@@ -39,7 +34,7 @@ class Paver extends BasePaver
         add_action('admin_menu', [$this, 'settings']);
 
         add_action('rest_api_init', function () {
-            new Endpoints();
+            new Endpoints;
         });
 
         $this->options = get_option('paver', []);
@@ -50,22 +45,22 @@ class Paver extends BasePaver
         return $this->options[$key] ?? $default;
     }
 
-    function setApiData()
+    public function setApiData()
     {
         $this->api->setPayload([
             'post_id' => get_the_ID(),
         ]);
 
         $this->api->setHeaders([
-            'X-WP-Nonce' => wp_create_nonce('wp_rest')
+            'X-WP-Nonce' => wp_create_nonce('wp_rest'),
         ]);
     }
 
-    function settings()
+    public function settings()
     {
         $settings = new WPSettings(__('Paver'));
 
-        $settings->set_menu_icon('data:image/svg+xml;base64,'.base64_encode(file_get_contents(__DIR__ . '/../resources/svgs/icon.svg')));
+        $settings->set_menu_icon('data:image/svg+xml;base64,'.base64_encode(file_get_contents(__DIR__.'/../resources/svgs/icon.svg')));
 
         $section = $settings->add_tab(__('General', 'paver'))
             ->add_section('General');
@@ -74,7 +69,7 @@ class Paver extends BasePaver
             'name' => 'post_types',
             'description' => __('Select post types to enable the Paver editor for.', 'textdomain'),
             'label' => __('Post types', 'textdomain'),
-            'options' => fn() => get_post_types(['public' => true])
+            'options' => fn () => get_post_types(['public' => true]),
         ]);
 
         $settings->make();
