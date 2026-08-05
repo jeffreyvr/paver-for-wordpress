@@ -16,6 +16,10 @@
     min-height: 120px;
 }
 
+#paver-sidebar .paver__sidebar-shell {
+    width: 100%;
+}
+
 #paver-sidebar .paver__sidebar {
     width: 100%;
     min-width: 0;
