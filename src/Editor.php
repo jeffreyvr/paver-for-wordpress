@@ -10,19 +10,19 @@ class Editor
 {
     public function __construct()
     {
-        add_action('admin_init', function() {
+        add_action('admin_init', function () {
             $postTypes = Paver::instance()->getOption('post_types', []);
 
             foreach ($postTypes as $postType) {
                 if ($this->usePaverEditor()) {
-                    add_filter('use_block_editor_for_' . $postType, '__return_false', 10);
+                    add_filter('use_block_editor_for_'.$postType, '__return_false', 10);
 
                     remove_post_type_support($postType, 'editor');
                 }
 
                 add_action('save_post', [$this, 'save']);
 
-                add_filter($postType . '_row_actions', [$this, 'addRowAction'], 10, 2);
+                add_filter($postType.'_row_actions', [$this, 'addRowAction'], 10, 2);
             }
         });
 
@@ -36,19 +36,18 @@ class Editor
 
         add_action('admin_bar_menu', [$this, 'adminMenuBar'], 80);
 
-        add_filter('template_include', function($template) {
-            if($this->postUsesPaver() && file_exists(get_stylesheet_directory() . '/paver.php')) {
-                return get_stylesheet_directory() . '/paver.php';
+        add_filter('template_include', function ($template) {
+            if ($this->postUsesPaver() && file_exists(get_stylesheet_directory().'/paver.php')) {
+                return get_stylesheet_directory().'/paver.php';
             }
 
             return $template;
         });
-
     }
 
     function adminMenuBar($wp_admin_bar)
     {
-        if (!current_user_can('edit_posts')) {
+        if (! current_user_can('edit_posts')) {
             return;
         }
 
@@ -56,16 +55,16 @@ class Editor
         $postTypes = Paver::instance()->getOption('post_types', []);
 
         if ($post && is_singular($postTypes)) {
-            $wp_admin_bar->add_node(array(
-                'id'    => 'paver-edit',
+            $wp_admin_bar->add_node([
+                'id' => 'paver-edit',
                 'title' => 'Edit (Paver)',
-                'href'  => $this->editWithPaver($post),
+                'href' => $this->editWithPaver($post),
                 'is_subitem' => false,
-                'meta'  => array(
+                'meta' => [
                     'class' => 'paver-edit-page',
                     'title' => 'Edit this page with Paver',
-                ),
-            ));
+                ],
+            ]);
         }
     }
 
@@ -89,14 +88,14 @@ class Editor
             $post = get_post($post);
         }
 
-        return add_query_arg('paver-editor', '', get_edit_post_link($post->ID));
+        return esc_url(add_query_arg('paver-editor', '', get_edit_post_link($post->ID, 'raw')));
     }
 
     function addRowAction($actions, $post)
     {
         $newActions = [];
 
-        $newActions['edit_paver'] = '<a href="' . add_query_arg('paver-editor', '', get_edit_post_link($post->ID)) . '">' . __('Edit (Paver)', 'textdomain') . '</a>';
+        $newActions['edit_paver'] = '<a href="'.$this->editWithPaver($post).'">'.__('Edit (Paver)', 'textdomain').'</a>';
 
         return array_merge($newActions, $actions);
     }
@@ -134,7 +133,7 @@ class Editor
 
             wp_update_post([
                 'ID' => $post_id,
-                'post_content' => strip_tags($this->renderForPage($post_id), '<p><a><strong><em><ul><ol><li><h1><h2><h3><h4><h5><h6><img><figure><figcaption><iframe><video><audio><source><blockquote><code><pre><br><hr>')
+                'post_content' => strip_tags($this->renderForPage($post_id), '<p><a><strong><em><ul><ol><li><h1><h2><h3><h4><h5><h6><img><figure><figcaption><iframe><video><audio><source><blockquote><code><pre><br><hr>'),
             ]);
 
             add_action('save_post', [$this, 'save']);
@@ -154,7 +153,7 @@ class Editor
         }
 
         wp_enqueue_script('alpinejs', 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js', [], null, [
-            'strategy' => 'defer'
+            'strategy' => 'defer',
         ]);
 
         foreach (paver()->blocks(withInstance: true) as $block) {
@@ -184,10 +183,9 @@ class Editor
         $postTypes = Paver::instance()->getOption('post_types', []);
 
         if (is_singular($postTypes) && is_main_query()) {
-
             $blocks = get_post_meta(get_the_ID(), '_paver_editor_content', true);
 
-            return !empty($blocks);
+            return ! empty($blocks);
         }
 
         return false;
@@ -195,7 +193,6 @@ class Editor
 
     function content($content)
     {
-
         if ($this->postUsesPaver()) {
             $content = $this->renderForPage();
         }
@@ -208,13 +205,13 @@ class Editor
         global $editor_styles;
         $styles = '';
 
-        if (!empty($editor_styles)) {
+        if (! empty($editor_styles)) {
             foreach ($editor_styles as $style) {
                 $style_path = locate_template($style);
                 if ($style_path) {
                     $content = file_get_contents($style_path);
                     $content = str_replace('body#tinymce.wp-editor.content', 'body', $content);
-                    $styles .= '<style>'. $content . '</style>';
+                    $styles .= '<style>'.$content.'</style>';
                 }
             }
         }
@@ -228,7 +225,7 @@ class Editor
 
         foreach (paver()->blocks(withInstance: true) as $block) {
             foreach ($block['instance']->styles as $style) {
-                $output .= '<link rel="stylesheet" href="' . $style['src'] . '">';
+                $output .= '<link rel="stylesheet" href="'.$style['src'].'">';
             }
         }
 
@@ -241,7 +238,7 @@ class Editor
 
         foreach (paver()->blocks(withInstance: true) as $block) {
             foreach ($block['instance']->scripts as $script) {
-                $output .= '<script src="' . $script['src'] . '"></script>';
+                $output .= '<script src="'.$script['src'].'"></script>';
             }
         }
 
@@ -274,7 +271,8 @@ class Editor
     {
         if (! $this->usePaverEditor()) {
             echo '<p>Want to use the Paver editor instead?</p>';
-            echo '<a href="'.$this->editWithPaver($post).'" class="button button-primary">'.file_get_contents('../resources/svgs/icon.svg').'Use Paver</a></p>';
+            echo '<a href="'.$this->editWithPaver($post).'" class="button button-primary">Use Paver</a>';
+
             return;
         }
 
@@ -288,8 +286,14 @@ class Editor
         paver()->locale = explode('_', get_locale())[0] ?? 'en';
 
         echo paver()->render(empty($blocks) ? null : $blocks, [
-            'showSaveButton' => false
+            'showSaveButton' => false,
         ]);
+
+        $wordpressCss = Paver::instance()->wordpressAssetPath.'css/wordpress.css';
+
+        if (is_string($wordpressCss) && file_exists($wordpressCss)) {
+            echo '<style>'.file_get_contents($wordpressCss).'</style>';
+        }
 
         echo '<input type="hidden" name="paver-editor" value="1">';
     }

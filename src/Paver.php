@@ -26,8 +26,8 @@ class Paver extends BasePaver
         $this->api->setEndpoint('/wp-json/paver/v1/editor');
 
         $this->assetPath = [
-            __DIR__.'/../assets/',
             $this->assetPath,
+            __DIR__.'/../assets/',
         ];
 
         add_action('add_meta_boxes', [$this, 'setApiData']);
