@@ -7,6 +7,44 @@
     margin: 0;
 }
 
+#paver-sidebar .inside {
+    margin: 0;
+    padding: 0;
+}
+
+#paver-sidebar .paver__sidebar-dock {
+    min-height: 120px;
+}
+
+#paver-sidebar .paver__sidebar {
+    width: 100%;
+    min-width: 0;
+    border-left: none;
+}
+
+#paver-sidebar .paver__resizer {
+    display: none;
+}
+
+#paver-sidebar .paver__sticky {
+    position: static;
+    max-height: none;
+}
+
+#paver-sidebar .paver__section {
+    min-height: 0;
+    overflow: visible;
+}
+
+#paver .paver__container.paver__docked {
+    width: 100%;
+}
+
+#paver .paver__container.paver__docked > div {
+    width: 100%;
+    min-width: 0;
+}
+
 .paver__selected-image {
     height: 160px;
     border: 1px solid #f9f9f9;
