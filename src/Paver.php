@@ -25,9 +25,6 @@ class Paver extends BasePaver
 
         $this->api->setEndpoint('/wp-json/paver/v1/editor');
 
-        // Core package first: a full paver.css here would shadow the real
-        // editor styles (and an old build once did, breaking tippy and fields).
-        // This package only ships WordPress-specific assets after that.
         $this->assetPath = [
             $this->assetPath,
             __DIR__.'/../assets/',
