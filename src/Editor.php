@@ -89,14 +89,14 @@ class Editor
             $post = get_post($post);
         }
 
-        return add_query_arg('paver-editor', '', get_edit_post_link($post->ID));
+        return esc_url(add_query_arg('paver-editor', '', get_edit_post_link($post->ID, 'raw')));
     }
 
     function addRowAction($actions, $post)
     {
         $newActions = [];
 
-        $newActions['edit_paver'] = '<a href="' . add_query_arg('paver-editor', '', get_edit_post_link($post->ID)) . '">' . __('Edit (Paver)', 'textdomain') . '</a>';
+        $newActions['edit_paver'] = '<a href="'.$this->editWithPaver($post).'">'.__('Edit (Paver)', 'textdomain').'</a>';
 
         return array_merge($newActions, $actions);
     }
