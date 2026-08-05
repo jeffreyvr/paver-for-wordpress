@@ -1,0 +1,50 @@
+/* WordPress chrome and option styles that only apply in the admin. */
+
+#paver .postbox-header {
+    display: none;
+}
+
+#paver .inside {
+    padding: 0;
+    margin: 0;
+}
+
+.paver__selected-image {
+    height: 160px;
+    border: 1px solid #f9f9f9;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.paver__selected-image img {
+    height: 160px;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.paver__placeholder-image {
+    height: 160px;
+    border: 1px solid #f9f9f9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.paver__image-buttons {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.paver__image-buttons .paver__btn-icon {
+    background: hsla(0, 0%, 100%, 0.9);
+}

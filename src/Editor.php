@@ -291,6 +291,13 @@ class Editor
             'showSaveButton' => false
         ]);
 
+        // Postbox chrome and Image option styles that only apply in WP admin.
+        $wordpressCss = Paver::instance()->wordpressAssetPath.'css/wordpress.css';
+
+        if (is_string($wordpressCss) && file_exists($wordpressCss)) {
+            echo '<style>'.file_get_contents($wordpressCss).'</style>';
+        }
+
         echo '<input type="hidden" name="paver-editor" value="1">';
     }
 }
