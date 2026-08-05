@@ -36,10 +36,6 @@ class Editor
 
         add_action('admin_bar_menu', [$this, 'adminMenuBar'], 80);
 
-        add_filter('admin_body_class', [$this, 'bodyClass']);
-
-        add_action('admin_footer', [$this, 'startAlpine'], 100);
-
         add_filter('template_include', function ($template) {
             if ($this->postUsesPaver() && file_exists(get_stylesheet_directory().'/paver.php')) {
                 return get_stylesheet_directory().'/paver.php';
@@ -104,15 +100,6 @@ class Editor
         return array_merge($newActions, $actions);
     }
 
-    function bodyClass($classes)
-    {
-        if ($this->usePaverEditor()) {
-            $classes .= ' paver-editor';
-        }
-
-        return $classes;
-    }
-
     function register()
     {
         $postTypes = Paver::instance()->getOption('post_types', []);
@@ -126,32 +113,7 @@ class Editor
                 'normal',
                 'high'
             );
-
-            if ($this->usePaverEditor()) {
-                add_meta_box(
-                    'paver-sidebar',
-                    __('Blocks', 'paver'),
-                    [$this, 'renderSidebarDock'],
-                    $postType,
-                    'side',
-                    'high'
-                );
-            }
         }
-    }
-
-    function renderSidebarDock($post)
-    {
-        echo '<div id="paver-sidebar-dock" class="paver__sidebar-dock"></div>';
-    }
-
-    function startAlpine()
-    {
-        if (! $this->usePaverEditor()) {
-            return;
-        }
-
-        echo '<script>window.Alpine && window.Alpine.start();</script>';
     }
 
     function save($post_id)
@@ -323,12 +285,8 @@ class Editor
 
         paver()->locale = explode('_', get_locale())[0] ?? 'en';
 
-        paver()->alpine = false;
-
         echo paver()->render(empty($blocks) ? null : $blocks, [
             'showSaveButton' => false,
-            'showExpandButton' => false,
-            'sidebarTeleport' => '#paver-sidebar-dock',
         ]);
 
         $wordpressCss = Paver::instance()->wordpressAssetPath.'css/wordpress.css';
