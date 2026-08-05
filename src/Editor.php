@@ -273,10 +273,8 @@ class Editor
     function render($post)
     {
         if (! $this->usePaverEditor()) {
-            $icon = file_get_contents(__DIR__.'/../resources/svgs/icon.svg');
-
             echo '<p>Want to use the Paver editor instead?</p>';
-            echo '<a href="'.$this->editWithPaver($post).'" class="button button-primary">'.$icon.' Use Paver</a>';
+            echo '<a href="'.$this->editWithPaver($post).'" class="button button-primary">Use Paver</a>';
 
             return;
         }
